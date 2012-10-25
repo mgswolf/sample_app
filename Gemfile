@@ -22,6 +22,13 @@ end
 
 gem 'jquery-rails'
 
+group :development do
+   gem 'guard'
+   gem 'guard-rspec'
+   gem 'rb-inotify', :require => false
+   gem 'libnotify'
+end
+
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
@@ -29,6 +36,9 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'fuubar'
+  gem 'spork', '~> 1.0rc'
+  gem 'guard-spork'
 end
 
 group :production do
