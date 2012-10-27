@@ -50,7 +50,13 @@ end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
+  # reload all the models
+    Dir["#{Rails.root}/app/models/**/*.rb"].each do |model|
+      load model
+    end
 
+    # reload routes
+    Rails.application.reload_routes!
 end
 
 # --- Instructions ---

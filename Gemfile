@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
-
+gem 'bcrypt-ruby', '~> 3.0.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -27,11 +27,13 @@ group :development do
    gem 'guard-rspec'
    gem 'rb-inotify', :require => false
    gem 'libnotify'
+   gem 'annotate', '~> 2.5.0'
 end
 
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'pry'
 end
 
 group :test do
