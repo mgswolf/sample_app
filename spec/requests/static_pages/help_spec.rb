@@ -1,14 +1,11 @@
 require 'spec_helper'
 
 describe "Help Page" do
-  it "should have the content 'Help'" do
-    visit '/static_pages/help'
-    page.should have_content('Help')
-  end
+  before { visit help_path }
+  subject { page }
 
-  it "should have the right title" do
-    visit '/static_pages/help'
-    page.should have_selector('title',
-            :text => "Ruby on Rails Tutorial Sample App | Help")
-  end
+  it { should have_selector('h1', text: 'Help')}
+
+  it { should have_selector('title',
+            :text => full_title('Help')) }
 end

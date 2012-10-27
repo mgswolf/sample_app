@@ -1,14 +1,11 @@
 require 'spec_helper'
 
 describe "About Page" do
-  it "should have the content 'About Us'" do
-    visit '/static_pages/about'
-    page.should have_content('About Us')
-  end
+  before { visit about_path }
+  subject { page }
 
-  it "should have the right title" do
-    visit '/static_pages/about'
-    page.should have_selector('title',
-            :text => "Ruby on Rails Tutorial Sample App | About Us")
-  end
+  it { should have_selector('h1', text: 'About Us') }
+
+  it { should have_selector('title',
+            text: full_title('About Us')) }
 end
