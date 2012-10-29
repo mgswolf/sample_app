@@ -42,6 +42,7 @@ group :test do
   gem 'fuubar'
   gem 'spork', '~> 1.0rc'
   gem 'guard-spork'
+  gem 'database_cleaner'
 end
 
 group :production do
