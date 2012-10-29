@@ -57,6 +57,7 @@ Spork.each_run do
 
     # reload routes
     Rails.application.reload_routes!
+    FactoryGirl.reload
 end
 
 # --- Instructions ---

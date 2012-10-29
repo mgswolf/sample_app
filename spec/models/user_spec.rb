@@ -2,11 +2,12 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)
 #
 
 require 'spec_helper'
@@ -72,6 +73,15 @@ describe User do
     it { should_not be_valid }
   end
 
+  describe "email has save in downcase format" do
+    before do
+      @user.email = @user.email.upcase
+      @user.save
+    end
+
+    its(:email) { should == @user.email.downcase}
+  end
+
   describe "when password is not present" do
     before { @user.password = @user.password_confirmation = '' }
     it { should_not be_valid }
@@ -92,6 +102,7 @@ describe User do
     it { should be_invalid }
   end
 
+
   describe "return value of authenticate method" do
     before { @user.save }
     let(:found_user) { User.find_by_email(@user.email) }
@@ -107,4 +118,5 @@ describe User do
       specify { user_for_invalid_password.should be_false }
     end
   end
+
 end
