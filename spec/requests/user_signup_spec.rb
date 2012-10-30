@@ -34,23 +34,17 @@ describe "User's Signup", :type => :request do
   end
 
   describe "with valid args" do
+    let(:user) { FactoryGirl.build(:user) }
+    before { valid_signup(user)}
 
     it 'create a new account' do
-      fill_in 'Name',        with: 'Example User'
-      fill_in 'Email',        with: 'user@example.com'
-      fill_in 'Password',     with: 'foobar'
-      fill_in 'Confirmation', with: 'foobar'
       expect { click_button submit }.to change(User, :count).by(1)
     end
 
     it 'show sucess message' do
-      fill_in 'Name',        with: 'Example User'
-      fill_in 'Email',        with: 'user2@example.com'
-      fill_in 'Password',     with: 'foobar'
-      fill_in 'Confirmation', with: 'foobar'
       click_button submit
       page.should have_content("Welcome to the Sample App!")
-      page.should have_selector('title', text: 'Example User')
+      page.should have_selector('title', text: user.name)
     end
 
   end
