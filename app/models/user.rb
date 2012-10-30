@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
   before_save { self.email.downcase! }
   before_save :create_remember_token
 
+  def admin?
+    admin
+  end
+
   private
 
     def create_remember_token
