@@ -42,7 +42,9 @@ group :test do
   gem 'fuubar'
   gem 'spork', '~> 1.0rc'
   gem 'guard-spork'
-  gem 'database_cleaner'
+  gem 'guard-cucumber'
+  gem 'cucumber-rails', '~> 1.3.0', require: false
+  gem 'database_cleaner', '~> 0.8.0'
 end
 
 group :production do

@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe "User's Signup", :type => :request do
   before do
-    User.delete_all
     visit signup_path
   end
   let(:submit) { "Create my account" }
