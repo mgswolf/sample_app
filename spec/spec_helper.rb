@@ -53,7 +53,7 @@ RSpec.configure do |config|
       DatabaseCleaner.start
     end
 
-    config.after(:each) do
+    config.after(:all) do
       DatabaseCleaner.clean
     end
 end
