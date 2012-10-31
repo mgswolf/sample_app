@@ -31,6 +31,7 @@ group :development do
    gem 'rb-inotify', :require => false
    gem 'libnotify'
    gem 'annotate', '~> 2.5.0'
+   gem 'debugger'
 end
 
 group :development, :test do

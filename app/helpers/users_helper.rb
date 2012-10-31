@@ -7,4 +7,8 @@ module UsersHelper
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}.jpg"
     image_tag(gravatar_url, alt: user.name, class: 'gravatar')
   end
+
+  def submit_text(f)
+    f.object.new_record? ? 'Create my account' : 'Save changes'
+  end
 end

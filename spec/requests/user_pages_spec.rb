@@ -26,6 +26,21 @@ describe "UserPages" do
     end
   end
 
+  describe "as a signed in user" do
+    let(:user) { FactoryGirl.create(:user) }
+    before { signin user }
+
+    it "cannot access new action" do
+      get new_user_path
+      response.should redirect_to(root_path)
+    end
+
+    it "cannot access create action" do
+      post users_path
+      response.should redirect_to(root_path)
+    end
+  end
+
   describe "signup page" do
     before { visit signup_path }
 
@@ -77,7 +92,7 @@ describe "UserPages" do
   end
 
   describe "delete links" do
-
+    before { FactoryGirl.create(:user) }
     it { should_not have_link('delete') }
 
     describe "as an admin user" do
@@ -92,6 +107,15 @@ describe "UserPages" do
         expect { click_link('delete') }.to change(User, :count).by(-1)
       end
       it { should_not have_link('delete', href: user_path(admin)) }
+
+      it "cannot destroy thenself" do
+        expect {  delete user_path(admin) }.to_not change(User, :count).by(-1)
+      end
+      it "don't destroy thenself and redirect to profile" do
+          delete user_path(admin)
+          response.should redirect_to user_path(admin)
+          page.should have_content(admin.name)
+      end
     end
   end
 end
