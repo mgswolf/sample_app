@@ -3,9 +3,10 @@ require 'spec_helper'
 describe "UserPages" do
   subject { page }
   let(:user) { FactoryGirl.create(:user) }
+  before(:all) { 30.times { FactoryGirl.create(:user) } }
 
   describe "index" do
-    before(:all) { 30.times { FactoryGirl.create(:user) } }
+
     before do
       signin user
       visit users_path
@@ -49,10 +50,18 @@ describe "UserPages" do
   end
 
   describe "profile page" do
+    let!(:m1) { FactoryGirl.create(:micropost, user: user, content: 'Foo') }
+    let!(:m2) { FactoryGirl.create(:micropost, user: user, content: "Bar") }
     before { visit user_path(user) }
 
     it { should have_selector('h1', text: user.name) }
     it { should have_selector('title', text: user.name)}
+
+    describe "microposts" do
+      it { should have_content(m1.content) }
+      it { should have_content(m2.content) }
+      it { should have_content(user.microposts.count) }
+    end
   end
 
   describe "edit" do
