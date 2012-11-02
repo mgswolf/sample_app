@@ -123,7 +123,6 @@ describe "UserPages" do
       it "don't destroy thenself and redirect to profile" do
           delete user_path(admin)
           response.should redirect_to user_path(admin)
-          page.should have_content(admin.name)
       end
     end
   end
